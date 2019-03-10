@@ -3,8 +3,8 @@ console.log('app.js 作業開始');
 const fs = require('fs');
 const os = require('os');
 const yargs = require('yargs');
+const notes = require('./notes.js');
 
-let notes = require('./notes.js');
 let argv = yargs.argv;
 let command = argv._[0];
 
