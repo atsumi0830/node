@@ -52,7 +52,14 @@ let readNote = (title) => {
 };
 
 let removeNote = (title) => {
-    console.log('メモ削除', title);
+    //既存のデータを取得
+    let notes = fetchNotes();
+    //引数を元、検索に引っかかった場合削除処理
+    let filteredNotes = notes.filter(note => note.title !== title);
+    //削除後のデータを保存
+    saveNotes(filteredNotes);
+
+    return notes.length !== filteredNotes.length;
 };
 
 
