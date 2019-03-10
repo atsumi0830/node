@@ -3,19 +3,10 @@ console.log('app.js 作業開始');
 const fs = require('fs');
 const os = require('os');
 const yargs = require('yargs');
-const argv = yargs.argv;
-
-
-let user = os.userInfo();
 
 let notes = require('./notes.js');
-
-let result = notes.addNote();
-
-let command = process.argv[2];
-console.log("コマンド:", command);
-
-console.log(argv);
+let argv = yargs.argv;
+let command = argv._[0];
 
 // fs.appendFile('greeting.txt', 'hello! ' + user.username + 'さんは' + notes.age + '歳です。', function (err) {
 //     if(err) {
@@ -24,11 +15,11 @@ console.log(argv);
 // });
 
 if(command === 'add') {
-    console.log('メモを追加');
+    notes.addNote(argv.title, argv.body);
 } else if(command === 'list') {
-    console.log('メモを一覧表示');
+    notes.showAll();
 } else if(command === 'read') {
-    console.log('メモを個別表示');
+    notes.readNote(argv.title);
 } else if(command === 'remove') {
-    console.log('メモを削除');
+    notes.removeNote(argv.title);
 }
