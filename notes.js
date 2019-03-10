@@ -8,28 +8,36 @@ fs = require('fs');
 //     return "new note";
 // }
 
+
+// notes-data.json 読み込み処理  ファイルがなかった場合スルー
+let fetchNotes = () => {
+    try {
+        let notesString = fs.readFileSync('notes-data.json');
+        return JSON.parse(notesString);
+    } catch(e) {
+        return [];
+    }
+};
+
+
+// 保存処理
+let saveNotes = notes => {
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
 let addNote = (title, body) => {
-    console.log('メモ追加', title, body);
-    let notes = [];
+    let notes = fetchNotes();
     let note = {
         title,
         body
     };
-
-    //notes-data.json　ファイルがなかった場合スルー
-    try {
-        let notesString = fs.readFileSync('notes-data.json');
-        notes = JSON.parse(notesString);
-    } catch(e) {
-
-    }
 
     //重複しているtitleがあった場合スルー
     let duplicatedNotes = notes.filter(note => note.title === title);
 
     if(duplicatedNotes.length === 0) {
         notes.push(note);
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+        saveNotes(notes);
     }
 };
 
