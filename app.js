@@ -19,16 +19,20 @@ if(command === 'add') {
     // 成功したかどうかメッセージを表示
     if(note) {
         console.log('保存されました');
-        console.log('------------');
-        console.log(`タイトル: ${note.title}`);
-        console.log(`内容: ${note.body}`);
+        notes.logNotes(note);
     } else {
         console.log('タイトルが重複しています。');
     }
 } else if(command === 'list') {
     notes.showAll();
 } else if(command === 'read') {
-    notes.readNote(argv.title);
+    let note = notes.readNote(argv.title);
+    if(note) {
+        console.log('見つかりました。');
+        notes.logNotes(note);
+    } else {
+        console.log('見つかりませんでした。');
+    }
 } else if(command === 'remove') {
     let noteRemoved = notes.removeNote(argv.title);
     let message = noteRemoved ? '削除が完了しました。' : '見つかりませんでした';

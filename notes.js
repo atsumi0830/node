@@ -19,6 +19,13 @@ let fetchNotes = () => {
     }
 };
 
+//ログをモジュール化
+let logNotes = note => {
+    console.log('------------');
+    console.log(`タイトル: ${note.title}`);
+    console.log(`内容: ${note.body}`);
+};
+
 
 // 保存処理
 let saveNotes = notes => {
@@ -40,7 +47,6 @@ let addNote = (title, body) => {
         saveNotes(notes);
         return note;
     }
-
 };
 
 let showAll = () => {
@@ -48,7 +54,12 @@ let showAll = () => {
 };
 
 let readNote = (title) => {
-    console.log('個別メモ表示', title);
+    //既存のデータを取得
+    let notes = fetchNotes();
+    //引数を元、検索に引っかかった場合削除処理
+    let filteredNotes = notes.filter(note => note.title === title);
+    //検索で引っかかった値を返す
+    return filteredNotes[0];
 };
 
 let removeNote = (title) => {
@@ -63,9 +74,12 @@ let removeNote = (title) => {
 };
 
 
+
+
 module.exports = {
     addNote,
     showAll,
     readNote,
     removeNote,
+    logNotes
 };
