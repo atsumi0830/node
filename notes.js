@@ -1,13 +1,4 @@
-console.log('notes.js 作業開始');
-
 fs = require('fs');
-// module.exports.age = 25;
-//
-// module.exports.addNote = function () {
-//     console.log('addNote');
-//     return "new note";
-// }
-
 
 // notes-data.json 読み込み処理  ファイルがなかった場合スルー
 let fetchNotes = () => {
