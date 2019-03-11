@@ -14,6 +14,7 @@ let command = argv._[0];
 //     }
 // });
 
+//　コマンドごとに処理を分岐
 if(command === 'add') {
     let note = notes.addNote(argv.title, argv.body);
     // 成功したかどうかメッセージを表示
@@ -24,7 +25,9 @@ if(command === 'add') {
         console.log('タイトルが重複しています。');
     }
 } else if(command === 'list') {
-    notes.showAll();
+    let allNotes = notes.showAll();
+    console.log(`表示数: ${allNotes.length}`);
+    allNotes.forEach(note => notes.logNotes(note));
 } else if(command === 'read') {
     let note = notes.readNote(argv.title);
     if(note) {

@@ -32,6 +32,7 @@ let saveNotes = notes => {
     fs.writeFileSync('notes-data.json', JSON.stringify(notes));
 };
 
+//追加処理
 let addNote = (title, body) => {
     let notes = fetchNotes();
     let note = {
@@ -49,10 +50,12 @@ let addNote = (title, body) => {
     }
 };
 
+//　一覧表示
 let showAll = () => {
-    console.log('すべてのメモ表示');
+    return fetchNotes();
 };
 
+//　個別表示
 let readNote = (title) => {
     //既存のデータを取得
     let notes = fetchNotes();
@@ -62,6 +65,7 @@ let readNote = (title) => {
     return filteredNotes[0];
 };
 
+// 削除処理
 let removeNote = (title) => {
     //既存のデータを取得
     let notes = fetchNotes();
@@ -72,8 +76,6 @@ let removeNote = (title) => {
 
     return notes.length !== filteredNotes.length;
 };
-
-
 
 
 module.exports = {
